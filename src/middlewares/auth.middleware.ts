@@ -15,9 +15,8 @@ export const authMidd = (req: Request, res: Response, next: () => void) => {
         else
             throw new Error(`Authorization not found`)
     } catch (err) {
-        return res.status(401).json({ error: true, message: err.message }).end();
+        return res.status(201).json({ error: true, message: err.message }).end();
     }
-
 }
 
 
@@ -55,7 +54,7 @@ export const registerMidd = (req: Request, res: Response, next: () => void) => {
         next()
 
     } catch (err) {
-        return res.status(401).json({ error: true, message: err.message }).end();
+        return res.status(201).json({ error: true, message: err.message }).end();
     }
 }
 
@@ -92,6 +91,6 @@ export const loginMidd = (req: Request, res: Response, next: () => void) => {
         next()
 
     } catch (err) {
-        return res.status(401).json({ error: true, message: err.message }).end();
+        return res.status(201).json({ error: true, message: err.message }).end();
     }
 }

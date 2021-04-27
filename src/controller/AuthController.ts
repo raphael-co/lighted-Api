@@ -15,13 +15,13 @@ export class AuthController {
         try {
             let client: any = await Client.select({ email: data.email });
             if (client.length == 0)
-                throw new Error(`L'email n'est pas reconnu !`)
+                throw new Error(`Email ou Mot de passe erroné !`)
             client = client[0];
             
             const isOk = await PasswordException.comparePassword(data.password, client.password);
             
             if (!isOk)
-                throw new Error(`Mot de passe erroné !`)
+                throw new Error(`Email ou Mot de passe erroné !`)
 
             const theToken: any = await sign({ id: client.personne_idpersonne, name: client.fullname }, < string > process.env.JWT_KEY, { expiresIn: '1m' })
 
@@ -31,7 +31,7 @@ export class AuthController {
             }
             return res.status(201).json(token);
         } catch (err) {
-            return res.status(401).json({ error: true, message: err.message }).end();
+            return res.status(201).json({ error: true, message: err.message }).end();
         }
     }
 
@@ -46,7 +46,7 @@ export class AuthController {
 
         try {
             if (await Client.isExiste(data.email))
-                throw new Error(`Email exist!`)
+                throw new Error(`Email deja existant `)
 
             const personne = new Personne(null, data.prenom, data.nom, data.dateNaiss, data.pays, data.adresse, data.ville, data.zipcode);
             await personne.save();
@@ -63,7 +63,7 @@ export class AuthController {
             return res.status(201).json(token);
 
         } catch (err) {
-            return res.status(401).json({ error: true, message: err.message }).end();
+            return res.status(201).json({ error: true, message: err.message }).end();
         }
     }
 
