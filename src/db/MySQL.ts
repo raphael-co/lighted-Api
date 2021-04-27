@@ -34,13 +34,14 @@ export default abstract class MySQL {
     static insert(table: string, instance: Client | Personne): Promise < number > {
         return new Promise((resolve, reject) => { // return Promise because the processing time of the database | The only way to get an answer is the "resolve()" or "reject()"
 
-            const bdd: Connection = createConnection({ // Init params to database
-                host: process.env.DB_HOST,
-                user: process.env.DB_USER,
-                password: process.env.DB_PASS,
-                database: process.env.DB_DATABASE,
-                port: parseInt((process.env.PORTMYSQL === undefined) ? '3306' : process.env.PORTMYSQL) // 3306 port default to mysql
-            })
+            const bdd: Connection = createConnection('mysql://ncuser_8174:UbzWinXpS5I1LIyS7CnYzgFNovtxvk@mysql-lighted-14685.nodechef.com:2523/lighted');
+            // createConnection({ // Init params to database
+            //     host: process.env.DB_HOST,
+            //     user: process.env.DB_USER,
+            //     password: process.env.DB_PASS,
+            //     database: process.env.DB_DATABASE,
+            //     port: parseInt((process.env.PORTMYSQL === undefined) ? '3306' : process.env.PORTMYSQL) // 3306 port default to mysql
+            // })
             bdd.connect(err => {
                 if (err) console.log('Connection database error');
             })
