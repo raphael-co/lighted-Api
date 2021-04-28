@@ -17,8 +17,10 @@ app.use(cors(
   
   app.use((req, res, next)=>
   {
-      res.setHeader('Access-Control-Allow-Origin', '*') // Accepte les requetes des toutes origines
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE') // Autoriser les méthodes
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', "true");
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
       next()
   })
 app.use(bodyParser.json())
