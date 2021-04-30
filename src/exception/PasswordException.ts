@@ -2,8 +2,8 @@ import { hash, compare, compareSync } from "bcrypt";
 
 export default class PasswordException extends Error {
 
-    private static SALT_ROUNDS: number = 10;
-    private static MIN_PASS_SIZE: number = 6;
+    private static SALT_ROUNDS: number = 20;
+    private static MIN_PASS_SIZE: number = 0;
 
     constructor() {
         super('Password is not valid')
